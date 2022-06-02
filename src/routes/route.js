@@ -9,10 +9,11 @@ router.get('/test-me', function (req, res) {
     // console.log('The constant in logger route has a value '+externalModule.endpoint)
     // console.log('The current batch is '+externalModule.batch)
     // externalModule.log()n
+let data= logger.welcome
 
-    res.send({message:logger.welcome})
-    res.send({message:helper.PrintDate&&helper.PrintMonth&&helper.getBatchInfo})
-    res.send({message:formatter.trim&&formatter.uppercase&&formatter.lowercase})
+    res.send({message:data()})
+//     // res.send({message:helper.PrintDate&&helper.PrintMonth&&helper.getBatchInfo})
+//     // res.send({message:formatter.trim&&formatter.uppercase&&formatter.lowercase})
 });
 
 router.get('/test-me1', function (req, res) {
