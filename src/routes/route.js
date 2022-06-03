@@ -1,36 +1,58 @@
 const express = require('express');
-const externalModule = require('./logger');
-const logger= require ("../logger/logger.js");
-const helper= require ("../util/helper.js");
-const formatter=require("../validator/formatter.js");
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    // console.log('The constant in logger route has a value '+externalModule.endpoint)
-    // console.log('The current batch is '+externalModule.batch)
-    // externalModule.log()n
-let data= logger.welcome
+let movies = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
 
-    res.send({message:data()})
-//     // res.send({message:helper.PrintDate&&helper.PrintMonth&&helper.getBatchInfo})
-//     // res.send({message:formatter.trim&&formatter.uppercase&&formatter.lowercase})
-});
+router.get('/movies', function (req, res) {
+    return res.send({ movies: movies })
+})
 
-router.get('/test-me1', function (req, res) {
-    res.send('My second ever api!')
-});
+router.get('/movie/:indexNumber', function (req, res) {
+    let number = req.params.indexNumber
+    if (number > movies.length - 1) {
+        return res.send({ msg: 'Not a valid index' })
+    }
+    return res.send({ Data: `Your required movie is` + " " + movies[number] })
+})
 
-router.get('/test-me2', function (req, res) {
-    res.send('My third api!')
-});
+router.get('/movie', function (req, res) {
+    let number = req.query.indexNumber
+    return res.send({ Data: `Your required movie is` + " " + movies[number] })
+})
 
-router.get('/test-me3', function (req, res) {
-    res.send('My 4th api!')
-});
+let flims = [
+    {
+        id: 1,
+        name: "The Shining"
+    }, {
+        id: 2,
+        name: "Incendies"
+    }, {
+        id: 3,
+        name: "Rang de Basanti"
+    }, {
+        id: 4,
+        name: "Finding Nemo"
+    }]
 
-router.get('/test-me4', function (req, res) {
-    res.send('My last api!')
-});
+router.get('/flim', function (req, res) {
+    return res.send({ flim: flims })
+})
+
+router.get('/flims/:flimid', function (req, res) {
+    let i = req.params.flimid
+    for (let i=0;i>flimid.length-1;i++)
+    {
+        return res.send({
+            msg: "No movie exists with this id"
+
+
+        })
+    }
+    return res.send({ Data: `Your required flim is` + " " + flims[flimid] })
+})
+
+
+
 
 module.exports = router;
-// adding this comment for no reason
