@@ -1,0 +1,25 @@
+{
+  "name": "sidhassignment",
+  "version": "1.0.0",
+  "description": "this is my first repository",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Subhamsidharth/project.git"
+  },
+  "author": "subham sidharth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Subhamsidharth/project/issues"
+  },
+  "homepage": "https://github.com/Subhamsidharth/project#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.6",
+    "nodemon": "^2.0.16"
+  }
+}
