@@ -1,13 +1,13 @@
-const UserModel= require("../models/userModel")
+const AuthorModel= require("../models/authormodels")
 
 const createUser= async function (req, res) {
     let data= req.body
-    let savedData= await UserModel.create(data)
-    res.send({msg: savedData})
+    let savedData= await AuthorModel.create(data)
+    res.send({message: savedData})
 }
 
 const getUsersData= async function (req, res) {
-    let allUsers= await UserModel.find()
+    let allUsers= await AuthorModel.find()
     res.send({msg: allUsers})
 }
 
