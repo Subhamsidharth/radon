@@ -14,21 +14,48 @@ let createBook = async (req, res) => {
     res.send({ msg: savedData })
 }
 let getBooksbyChetanBhagat=async(req,res)=>{
-    let data=await AuthorModel.find({author_name:"Chetan Bhagat"})
+    let data=await AuthorModel.findOne({author_name:"Chetan Bhagat"})
     let BooksData=await BookModel.find({author_id:data.author_id})
     res.send({msg:BooksData})
 }
 let authorofBook=async(req,res)=>{
-    let data=await AuthorModel.findOneAndUpdate({name:"Two states"},{$set:{prices:100}},{new:true})
-    let authorData=await AuthorModel.find({author_id:data.author_id}).select("author_name")
-    let price=data.prices
+    let data=await AuthorModel.findOneAndUpdate({name:"Two states"},{$set:{price:100}},{new:true})
+    let authorData=await AuthorModel.find({author_id:data.author_id})
+    let price=data.price
     res.send({msg:authorData,price})
 }
 
-// let bookBetween50_100=async(req,res)=>{
-    
-// }
+let bookBetween50_100=async(req,res)=>{
+    let data=await BookModel.find({price:{$gte:50,$lte:100}})
+    let details=[]
+    for(let i=0;i<data.length;i++){
+        let index=data[i]
+        let author=await AuthorModel.findOne({author_id:index.author_id})
+        let authorname=author.author_name
+        let bookname=index.name
+        let price=index.price
+        details.push({authorname:authorname,bookname:bookname,price:price})
+    }
+    res.send({Data:details})
+}
 
+const getbookbyid=async (req,res)=>{
+ let id=req.params.Author_id
+ let store=await BookModel.find({author_id:id})
+ res.send({Data:store})
+}
+
+const authormorethan50=async (req,res)=>{
+    let author=await AuthorModel.find({age:{$gte:50}})
+    let details=[]
+    for(let i=0;i<author.length;i++){
+        let book = await BookModel.find({author_id:author[i].author_id,rating:{$gte:4}})
+        if(book.length>0){
+            details.push({auhtorname:author[i].author_name,age:author[i].age})
+        }
+    }
+    res.send({Data:details})
+}
 
 //const getBooksData = async function (req, res) {
 
@@ -104,6 +131,9 @@ let authorofBook=async(req,res)=>{
 
 
 module.exports.createBook = createBook
-//module.exports.getBooksData = getBooksData
+module.exports. authorofBook = authorofBook
 module.exports. getBooksbyChetanBhagat =  getBooksbyChetanBhagat
-//module.exports.createBook = createBook
+module.exports.bookBetween50_100 = bookBetween50_100
+module.exports.getbookbyid = getbookbyid
+module.exports.authormorethan50 = authormorethan50
+

@@ -11,12 +11,13 @@ router.post("/createUser", UserController.createUser)
 router.get("/getUserData", UserController.getUsersData)
 
 
-//router.post("/createAuthor", BookController.createAuthor)
+
 
 router.post("/createBook", BookController.createBook)
-
 router.get("/getBookbyChetanBhagat", BookController.getBooksbyChetanBhagat)
-
-//router.get("/authorofBook", BookController.authorOfBook)
+router.get("/authorofBook", BookController.authorofBook)
+router.get("/bookdetails",BookController.bookBetween50_100)
+router.get("/getbook/:Author_id",BookController.getbookbyid)
+router.get("/authormorethan50",BookController.authormorethan50)
 
 module.exports = router;
