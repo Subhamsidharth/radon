@@ -2,10 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
-const app = express();
+const app = express();// globally used
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// const GM = require('../src/middleware/globalmd')
+// app.use(GM.GB)
+
+app.use(bodyParser.json());// convert object to string
+app.use(bodyParser.urlencoded({ extended: true })); //convert nested object to string
 
 
 mongoose.connect("mongodb://localhost:27017", {
@@ -14,7 +17,7 @@ mongoose.connect("mongodb://localhost:27017", {
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
-app.use('/', route);
+app.use('/', route); //route path is specified in globally
 
 
 app.listen(process.env.PORT || 3000, function () {
